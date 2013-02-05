@@ -233,4 +233,9 @@ when "ubuntu"
     "iscsi_helper" => "tgtadm",
     "package_overrides" => "-o Dpkg::Options::='--force-confold' -o Dpkg::Options::='--force-confdef'"
   }
+  if node["nova"]["libvirt"]["virt_type"] == "kvm"
+    default["nova"]["platform"]["nova_compute_packages"] += ["nova-compute-kvm"]
+  elsif node["nova"]["libvirt"]["virt_type"] == "qemu"
+    default["nova"]["platform"]["nova_compute_packages"] += ["nova-compute-qemu"]
+  end
 end
