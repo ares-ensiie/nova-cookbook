@@ -77,6 +77,7 @@ template "/etc/nova/nova.conf" do
   group "root"
   mode "0644"
   variables(
+    "dhcp_domain" => node["nova"]["dhcp_domain"],
     "use_syslog" => node["nova"]["syslog"]["use"],
     "log_facility" => node["nova"]["syslog"]["facility"],
     "db_ipaddress" => mysql_info["host"],

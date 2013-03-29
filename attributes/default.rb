@@ -54,6 +54,7 @@ default["nova"]["syslog"]["config_facility"] = "local1"
 # can this be wedged into the "api" endpoint?
 default["nova"]["compute"]["region"] = "RegionOne"
 
+default["nova"]["dhcp_domain"] = "novalocal"
 # TODO(shep): This should probably be ['nova']['network']['fixed']
 default["nova"]["networks"] = [
         {

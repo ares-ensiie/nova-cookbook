@@ -10,6 +10,7 @@ verbose=true
 auth_strategy=keystone
 dhcpbridge_flagfile=/etc/nova/nova.conf
 dhcpbridge=/usr/bin/nova-dhcpbridge
+dhcp_domain=<%= @dhcp_domain %>
 logdir=/var/log/nova
 <% if @use_syslog == true %>
 use_syslog=<%= @use_syslog %>
