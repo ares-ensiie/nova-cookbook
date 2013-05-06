@@ -88,10 +88,12 @@ node["nova"]["networks"].each do |net|
     end
 end
 
-if node.has_key?(:floating) and node["nova"]["network"]["floating"].has_key?(:ipv4_cidr)
-  execute "nova-manage floating create" do
-    command "nova-manage floating create --ip_range=#{node["nova"]["network"]["floating"]["ipv4_cidr"]}"
-    action :run
-    not_if "nova-manage floating list"
+if node.has_key?(:floating) and node["nova"]["network"]["floating"]
+  node["nova"]["network"]["floating"].each do |f|
+    execute "nova-manage floating create" do
+      command "nova-manage floating create --ip_range=#{f["ipv4_cidr"]} --interface=#{f["interface"]} --pool=#{f["pool"]}"
+      action :run
+      not_if "nova-manage floating list | grep #{f["ipv4_cidr"][/\d+\.\d+\.\d+/]}"
+    end
   end
 end
